@@ -4,7 +4,7 @@ const {app} = electron;
 const {BrowserWindow} = electron;
 const {Menu, MenuItem} = electron;
 
-var mainWindow = null;
+let mainWindow = null;
 
 require('electron-context-menu')({
     prepend: (params, browserWindow) => [{
@@ -17,7 +17,7 @@ require('electron-context-menu')({
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
-    if (process.platform != 'darwin') {
+    if (process.platform !== 'darwin') {
         app.quit();
     }
 });
@@ -38,7 +38,7 @@ app.on('ready', function() {
             "y": mainWindowState.y,
             "width": mainWindowState.width,
             "height": mainWindowState.height,
-            "minWidth": 1152,
+            "minWidth": 1024,
             "minHeight": 600,
             backgroundColor: '#3F51B5',
             icon: __dirname + '/img/logo.png',
