@@ -38,7 +38,7 @@ app.on('ready', function() {
             "y": mainWindowState.y,
             "width": mainWindowState.width,
             "height": mainWindowState.height,
-            "minWidth": 1024,
+            "minWidth": 1152,
             "minHeight": 600,
             backgroundColor: '#3F51B5',
             icon: __dirname + '/img/logo.png',
