@@ -25,11 +25,11 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
-  // Set default dimensions if a previous state isn't available
-  let mainWindowState = windowStateKeeper({
-     defaultWidth: 1280,
-     defaultHeight: 768
-  });
+    // Set default dimensions if a previous state isn't available
+    let mainWindowState = windowStateKeeper({
+        defaultWidth: 1280,
+        defaultHeight: 768
+    });
 
     // Create the browser window.
     mainWindow = new BrowserWindow(
@@ -38,7 +38,7 @@ app.on('ready', function() {
             "y": mainWindowState.y,
             "width": mainWindowState.width,
             "height": mainWindowState.height,
-            "minWidth": 1152,
+            /*"minWidth": 1152,*/
             "minHeight": 600,
             backgroundColor: '#3F51B5',
             icon: __dirname + '/img/logo.png',
@@ -84,6 +84,20 @@ app.on('ready', function() {
             mainWindow.show();
         //}
     });*/
+
+    mainWindow.webContents.on('new-window', function(e, url) {
+        e.preventDefault();
+        if(url.search('/?visio/') > -1) {
+            var win = new BrowserWindow()
+            win.setMenuBarVisibility(false)
+            win.loadURL(url)
+            win.on('closed', function() {
+                win = null;
+            });
+        } else {
+            require('electron').shell.openExternal(url);
+        }
+    });
 
     mainWindow.notification = function(counter) {
         if(counter > 0) {
